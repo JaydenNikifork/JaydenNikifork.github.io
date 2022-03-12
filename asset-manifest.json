@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eb19f76c.css",
+    "main.js": "/static/js/main.f2d577c3.js",
+    "static/js/787.223550ad.chunk.js": "/static/js/787.223550ad.chunk.js",
+    "static/media/Filter1.png": "/static/media/Filter1.e0a812aedd68cd5daba8.png",
+    "static/media/Filter2.png": "/static/media/Filter2.d1bd588a6072de9177bd.png",
+    "static/media/QLearn2.png": "/static/media/QLearn2.f76afa3405e3b81da1c4.png",
+    "static/media/QLearn4.png": "/static/media/QLearn4.78268ac414dd94591839.png",
+    "static/media/MoneyPrinter2.png": "/static/media/MoneyPrinter2.b36bdf916e55cc0223be.png",
+    "static/media/MoneyPrinter1.png": "/static/media/MoneyPrinter1.d54aeda72877d643fa84.png",
+    "static/media/QLearn1.png": "/static/media/QLearn1.88d59f49825084026479.png",
+    "static/media/QLearn3.png": "/static/media/QLearn3.344ca1d0e47289c78a6b.png",
+    "index.html": "/index.html",
+    "main.eb19f76c.css.map": "/static/css/main.eb19f76c.css.map",
+    "main.f2d577c3.js.map": "/static/js/main.f2d577c3.js.map",
+    "787.223550ad.chunk.js.map": "/static/js/787.223550ad.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb19f76c.css",
+    "static/js/main.f2d577c3.js"
+  ]
+}
