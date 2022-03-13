@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.App {
+  text-align: left;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins';
+    color: black;
+    margin: 0;
+}
+
+img
+{
+    border: 0;
+    vertical-align: middle;
+}
+
+.tab-bar
+{
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.main-header
+{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    animation-name: swoop;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+}
+
+@keyframes swoop
+{
+    0%      {left:100%;}
+    100%    {left:0%;}
+}
+
+.title
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 30vh;
+    width: 60vw;
+
+    justify-content: center;
+
+    border-top-left-radius: 42px;
+    border-top-right-radius: 42px;
+
+    backdrop-filter: brightness(180%) blur(10px);
+    color: #8080ff;
+}
+
+.projects-title
+{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 30vh;
+    width: 60vw;
+
+    align-self: center;
+    justify-content: center;
+
+    border-radius: 42px;
+
+    backdrop-filter: brightness(180%) blur(10px);
+    color: #8080ff;
+}
+
+.title h1
+{
+    font-size: 7vw;
+}
+
+.projects-title h1
+{
+    font-size: 7vw;
+}
+
+.projects-header
+{
+    border-bottom-left-radius: 42px;
+    border-bottom-right-radius: 42px;
+}
+
+.main-header p
+{
+    margin: 0%;
+    width: 60vw;
+
+    font-size: 4vw;
+
+    backdrop-filter: brightness(140%) blur(10px);
+
+    border-bottom-left-radius: 42px;
+    border-bottom-right-radius: 42px;
+}
+
+.project-container
+{
+    display: flex;
+    flex-direction: row;
+
+    margin: 2.5vw;
+
+    text-align: left;
+    font-size: large;
+
+    animation-name: swoop;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+
+    border-radius: 36px;
+    border-color: black;
+    border-style:outset;
+    border-width: 0px;
+
+    backdrop-filter: brightness(175%) hue-rotate(260deg) saturate(150%) ;
+}
+
+.project-container h1
+{
+    padding: 0px;
+    padding-left: 3vw;
+    padding-top: 3vh;
+}
+
+.project-info
+{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.project-info p
+{
+    width: 40vw;
+
+    padding: 3vw;
+    padding-right: 2vw;
+    padding-top: 0px;
+    padding-bottom: 3vh;
+    margin: 0px;
+    
+    line-height: 225%;
+    text-align: justify;
+}
+
+.project-image
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2vh;
+    padding-left: 0px;
+    padding-right: 1vw;
+}
+
+.project-image img
+{
+    width: 45vw;
+    border-radius: 36px;
+    border: #8080ff 6px solid;
+}
+
+.project-image button
+{
+    width: 30px;
+    height: 30%;
+    font-family: inherit;
+    font-size: x-large;
+    font-weight: 900;
+    color: black;
+    transition: 0.3s;
+
+    border: none;
+
+    background: none;
+}
+
+.project-image button:hover
+{
+    background-color: #8080ff;
+    color: white;
+}
+
+.prev
+{
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.next
+{
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.about
+{
+    margin: 3vw;
+
+    border-radius: 36px;
+    border-color: black;
+    border-style:outset;
+    border-width: 0px;
+    backdrop-filter: brightness(175%) hue-rotate(260deg) saturate(150%) ;
+}
+
+.about h1
+{
+    padding: 0px;
+    padding-left: 3vw;
+    padding-top: 3vh;
+}
+
+.about p
+{
+
+    width: 88vw;
+
+    padding: 3vh 3vw;
+    padding-top: 0px;
+    
+    line-height: 225%;
+    text-align: justify;
+    font-size: large;
+}
+
+.button
+{
+    background-color: #ddddff;
+    color: black;
+    opacity: 1;
+    
+    border-color: white;
+    border-radius: 4px;
+    border-width: 0px;
+    border-style: solid;
+    
+    padding: 6px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    font-family: 'Poppins';
+    font-size: 24px;
+    font-weight: 900;
+    margin: 4px 2px;
+    transition-duration: 0.25s;
+    cursor: pointer;
+}
+
+.button:hover
+{
+    opacity: 1;
+    background-color: #8080ff;
+    color: white;
+}
+
