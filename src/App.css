@@ -52,6 +52,12 @@ img
     100%    {left:0%;}
 }
 
+.page
+{
+    align-self: center;
+    width: 100vw;
+}
+
 .title
 {
     display: flex;
@@ -75,7 +81,10 @@ img
     flex-direction: column;
     margin: 0;
     height: 30vh;
-    width: 60vw;
+    
+    padding: 0px;
+    padding-left: 2vw;
+    padding-right: 2vw;
 
     align-self: center;
     justify-content: center;
@@ -88,7 +97,25 @@ img
 
 .title h1
 {
+    justify-self: center;
     font-size: 7vw;
+}
+
+.github-link
+{
+    display: inline-block;
+    background-image: url('Images/misc/GitHubLogo.png');
+    height: 32px;
+    width: 32px;
+    background-size: contain;
+    vertical-align: middle;
+    margin: 1vw;
+    transition: 0.3s;
+}
+
+.github-link:hover
+{
+    filter: invert(92%);
 }
 
 .projects-title h1
@@ -119,6 +146,7 @@ img
 {
     display: flex;
     flex-direction: row;
+    width: min-content;
 
     margin: 2.5vw;
 
@@ -131,9 +159,6 @@ img
     animation-timing-function: ease-out;
 
     border-radius: 36px;
-    border-color: black;
-    border-style:outset;
-    border-width: 0px;
 
     backdrop-filter: brightness(175%) hue-rotate(260deg) saturate(150%) ;
 }
@@ -143,6 +168,17 @@ img
     padding: 0px;
     padding-left: 3vw;
     padding-top: 3vh;
+}
+
+.project-link
+{
+    color: #8080ff;
+    transition: 0.3s;
+}
+
+.project-link:hover
+{
+    filter: brightness(155%) hue-rotate(240deg) saturate(170%) ;
 }
 
 .project-info

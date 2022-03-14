@@ -5,12 +5,11 @@ import { useEffect } from 'react';
 import { pyth, area, momentum, elasCollision, getAngle, getXVel, getYVel, getRand } from './helpers';
 import Scrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 import { Html } from 'react-konva-utils';
-import { About, Projects } from './pages';
+import { About, Projects, Additional } from './pages';
 
 var scrollPosX;
 var scrollPosY;
 var bounceSlow = 0.8;
-var x = 100;
 
 function update() {
   for (let i = 0; i < cirData.length; i++) {
@@ -27,7 +26,6 @@ function update() {
     cirData[i][2][0] += cirData[i][0][0];
     cirData[i][2][1] += cirData[i][0][1];
   }
-  x++;
 }
 
 function checkCollision(cir1, cir2) {
@@ -147,7 +145,8 @@ scrollbar.addListener(() => {
 
  const buttonList = [
   ["About Me", 0],
-  ["Projects", 1]
+  ["Featured Projects", 1],
+  ["Additional Projects", 2],
 ];
 
 class Page extends React.Component {
@@ -155,7 +154,8 @@ class Page extends React.Component {
     super();
     this.pages = [
       <About />,
-      <Projects />
+      <Projects />,
+      <Additional />
     ];
     this.buttons = buttonList.map(function(item, index) {
       return(
