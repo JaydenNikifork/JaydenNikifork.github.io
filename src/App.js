@@ -112,7 +112,7 @@ var cirData = [];
 
 function generateCircles() {
   for (let i = 0; i < getRand(4, 7); i++) {
-    cirData.push([[getRand(15, 15), getRand(-15, 15)], getRand(50, Math.min(window.innerHeight, window.innerWidth) / 3), 
+    cirData.push([[getRand(-15, 15), getRand(-15, 15)], getRand(50, Math.min(window.innerHeight, window.innerWidth) / 3), 
                   [getRand(0, window.innerWidth), getRand(0, window.innerHeight)], '#8080ff'])
   }
 }
