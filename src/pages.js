@@ -22,10 +22,10 @@ export function About() {
                 <h1>About Me</h1>
                 <p>
                     Hi, I'm Jayden Nikifork. I'm a first year engineering student at McMaster, planning to specialize in software engineering. I am super passionate about
-                    developing software and coding and have created this E-Portfolio website to showcase my coding projects and real life accomplishments. I know
-                    the languages C, Java, Python, JavaScript, HTML, CSS, and SQL, many of which I learned in Harvard CS50x. I also have experience using technologies such as 
+                    developing software and coding, so I created this E-Portfolio website to showcase my projects. I know
+                    the languages C, Java, Python, JavaScript, HTML, CSS, and SQL, many of which I learned in Harvard CS50x and I also have experience using technologies such as 
                     React.js, MySQL, and Flask. For my future, I have aspirations of one day running my own software company to revolutionize the world's educational systems. 
-                    Outside of coding I love althletics, especially weight lifting, and track &#38; field, in high school I competed on the track team, and was a leader of the 
+                    Outside of coding I love althletics, especially weight lifting, and track &#38; field. In high school I competed on the track team, and was a leader of the 
                     school's fitness club. Please feel free to take a look around my website and enjoy your stay!
                 </p>
             </div>
@@ -54,7 +54,7 @@ class ImageShifter extends React.Component {
             return(
                 <div className="project-image">
                 <button className="prev" onClick={ this.nextImage }>&#60;</button>
-                    <img src={ this.props.images[this.state.index] } alt="ligma" />
+                    <img src={ this.props.images[this.state.index] } alt="project pics" />
                     <button className="next" onClick={ this.nextImage }>&#62;</button>
                 </div>
             )
@@ -62,7 +62,7 @@ class ImageShifter extends React.Component {
         else {
             return(
                 <div className="project-image">
-                    <img src={ this.props.images[this.state.index] } alt="ligma" />
+                    <img src={ this.props.images[this.state.index] } alt="project pics" />
                 </div>
         )
         }
@@ -82,9 +82,9 @@ export function Projects() {
                     <div className="project-info">
                         <h1>QLearn</h1>
                         <p>
-                            I'm sure by now all of us students are tired of the annoying homemade homework websites we are forced to use in our classes. With QLearn, assigning and completing
-                            homework is made easy. QLearn is a very simple userfriendly homework Learning Management System in which teachers can post custom announcements and problem sets for their
-                            students. Likewise, students can then submit their answers to the problem sets which can then be viewed by the teacher.
+                            QLearn is a userfriendly learning management system (LMS) inspired by the numerous LMSs I've used as a university student. I typically find that most
+                            LMSs lack either an announcements page or a homework assignment page, so I figured I could develop one with both features. Along with those
+                            features, QLearn has teacher and student sign up and multi-class enrollment. 
                             <br /><br />
                             Developed using: Python, Flask, Jinja2, Bootstrap, MySQL, HTML, and CSS
                         </p>
@@ -93,7 +93,7 @@ export function Projects() {
                 </div>
                 <div className="project-container">
                     <div className='project-info'>
-                        <h1><a href='https://JaydenNikifork.github.io/collision-sim/' className='project-link'>2D Collision Simulation</a><a href='https://github.com/JaydenNikifork/collision-sim' className='github-link'></a></h1>
+                        <h1><a href='https://JaydenNikifork.github.io/collision-sim/' className='project-link'>Collision Sim</a><a href='https://github.com/JaydenNikifork/collision-sim' className='github-link'></a></h1>
                         <p>
                             A simulation of 2D inelastic collisions of circles. Upon page load, 4-6 circles are spawned with random attributes such as position,
                             velocity, size, and colour. The graphics were constructed using the React Konva library. Each of the circles are free to move and collide with each other and the edges of the site's viewport. The collision
@@ -112,11 +112,10 @@ export function Projects() {
                     <div className="project-info">
                         <h1>Money Printer</h1>
                         <p>
-                            Everyone wishes they could discover a way to make quick passive income. Well, the console based application, Money Printer, might just be that. Money Printer is
-                            a mock cryptocurrency trading bot that trades on a minutely timeframe. Money Printer acquires data on various coins via Kraken's crypto exchange API, and then calculates
-                            formulas for common trading indicators such as the relative strength index. From there, Money Printer searches for trends and signals amongst the indicators in order
-                            to determine the opportune buy and sell timings of cryptocurrencies. So far before fees, Money Printer actually has the ability to make money especially during
-                            bullish markets, meaning it might be soon time to let it trade on my real portfolio...
+                            Money Printer is a console based cryptocurrency paper trading bot. The bot is fed minutely price data from the Kraken Cryptocurrency Exchange
+                            which is used to calculate trading indicators such as the RSI and MFI which are then used to make trading decisions. The bot typically performs
+                            best in markets with clear trends with its highest account gains being 10% in one day. These result have been quite promising and with further
+                            optimization it might be time to let Money Printer trade on my real portfolio...
                             <br /><br />
                             Developed using: Python, and Kraken exchange API
                         </p>
@@ -142,7 +141,7 @@ export function Additional() {
                         <h1>Photo Filter</h1>
                         <p>
                             Well, Photoshop has definitely beaten me to this idea... Anyways, photo filter is a console based application which can apply various imaging filters
-                            to PNG files. The filters include, grayscale, blur, reflection, and edge detection. What the program does, is it takes in a PNG file and filter type via command line
+                            to SVG files. The filters include, grayscale, blur, reflection, and edge detection. What the program does, is it takes in a SVG file and filter type via command line
                             arguement, and then writes a new PNG file with the requested filter applied to the requested image.
                             <br /><br />
                             Developed using: C
@@ -154,7 +153,7 @@ export function Additional() {
                     <div className='project-info'>
                         <h1>Spell Checker</h1>
                         <p>
-                            Spell checkers are very common amongst many applications, soo why not make my own. Pretty much all this application does is take in 2 text files, one containing
+                            Spell checkers are very common amongst many applications, soo why not make my own. Pretty much all this application does is take in 2 text file locations as input, one containing
                             a piece of text to be spell checked, and another that contains a dictionary, then a list of words that are spelled wrong are printed in the console. The 
                             application then formats the dictionary into a hash table which significantly reduces runtime. From there the program runs through the text and checks each 
                             word to see if it also exists in the hash table, if not the word is considered misspelled and is printed in the console.
