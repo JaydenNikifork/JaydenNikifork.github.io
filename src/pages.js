@@ -11,7 +11,7 @@ const CollisionSimImages = importAll(require.context('./Images/CollisionSim/', f
 
 export function About() {
     return(
-        <>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
             <div className="main-header">
                 <div className="title">
                     <h1>Jayden Nikifork</h1>
@@ -29,7 +29,7 @@ export function About() {
                     school's fitness club. Please feel free to take a look around my website and enjoy your stay!
                 </p>
             </div>
-        </>
+        </div>
     );
 }
 
@@ -64,7 +64,7 @@ class ImageShifter extends React.Component {
                 <div className="project-image">
                     <img src={ this.props.images[this.state.index] } alt="project pics" />
                 </div>
-        )
+            )
         }
     }
 }
