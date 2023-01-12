@@ -21,10 +21,10 @@ export function About() {
             <div className="about">
                 <h1>About Me</h1>
                 <p>
-                    Hi, I'm Jayden Nikifork. I'm a first year engineering student at McMaster, planning to specialize in software engineering. I am super passionate about
+                    Hi, I'm Jayden Nikifork. I'm a computer science student at the University of Waterloo. I am super passionate about
                     developing software and coding, so I created this E-Portfolio website to showcase my projects. I know
-                    the languages C, Java, Python, JavaScript, HTML, CSS, and SQL, many of which I learned in Harvard CS50x and I also have experience using technologies such as 
-                    React.js, MySQL, and Flask. For my future, I have aspirations of one day running my own software company to revolutionize the world's educational systems. 
+                    the languages C/C++, Java, Python, JavaScript, HTML, CSS, and SQL, and I also have experience using technologies such as 
+                    ReactJS, Node.js, Firebase, MySQL, Django, and Flask. For my future, I have aspirations of one day running my own software company to revolutionize the world's educational systems. 
                     Outside of coding I love althletics, especially weight lifting, and track &#38; field. In high school I competed on the track team, and was a leader of the 
                     school's fitness club. Please feel free to take a look around my website and enjoy your stay!
                 </p>
@@ -194,3 +194,43 @@ export function Additional() {
         </>
     );
 }
+
+const buttonList = [
+    ["About Me", 0],
+    ["Featured Projects", 1],
+    ["Additional Projects", 2],
+  ];
+  
+ export class Page extends React.Component {
+    constructor() {
+      super();
+      this.pages = [
+        <About />,
+        <Projects />,
+        <Additional />
+      ];
+      this.buttons = buttonList.map(function(item, index) {
+        return(
+          <button className="button" key={index} onClick={() => this.handleClick(index)}>{item[0]}</button>
+        );
+      }, this);
+      this.state = {
+        page: this.pages[0]
+      };
+    }  
+    
+    handleClick(index) {
+      this.setState({page: this.pages[index]});
+    }
+  
+    render() {
+      return(
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div className="tab-bar">
+            {this.buttons}
+          </div>
+          {this.state.page}
+        </div>
+      );
+    }
+  }

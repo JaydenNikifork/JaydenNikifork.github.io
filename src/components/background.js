@@ -1,8 +1,5 @@
 import { useRef, useEffect } from "react";
-
-// const PRIMARY = '#d68ef5';
-const PRIMARY = '#8080ff';
-
+import { PRIMARY } from "../utils/constanst";
 
 export default function Background(props) {
     const canvasRef = useRef(null);
@@ -45,6 +42,7 @@ export default function Background(props) {
     const tick = (timeStamp) => {
         let dt = timeStamp - previousTimeStamp;
         if (dt > 100) dt = 100;
+        console.log(dt)
         previousTimeStamp = timeStamp;
 
         if (!paused) update(dt);
@@ -53,7 +51,7 @@ export default function Background(props) {
     }
 
     return (
-        <canvas ref={canvasRef} {...props} width={window.innerWidth} height={window.innerHeight} />
+        <canvas ref={canvasRef} {...props} />
     );
 }
 
