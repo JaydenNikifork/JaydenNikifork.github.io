@@ -61,7 +61,7 @@ async function onBuyClicked(windowLocalStorageIdentifier, explicitLocales) {
       credentialIds,
     };
     if (locales !== undefined) {
-      spcData.locales = locales;
+      spcData.locale = locales;
     }
 
     info('Triggering SPC with locales: ' + JSON.stringify(locales));
