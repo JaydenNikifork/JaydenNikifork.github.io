@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Payment Confirmation - Locales Demo</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+  <div id="contents">
+    <h1>Secure Payment Confirmation - Locales</h1>
+    <p>This is a test website. Nothing is charged.</p>
+    <p>
+      <label for="locales">Locales: </label>
+      <input
+        type="text"
+        id="locales"
+        value="[en-CA]"
+        style="width: 32em; font-family: monospace;"
+        placeholder="[en-US, en-CA, fr-CA]" />
+    </p>
+    <p>
+      <button onclick="createPaymentCredential('Credential #1')">Enroll Credential #1</button>
+    </p>
+    <p>
+      <button onclick="onBuyClicked('Credential #1')">Pay $0.01</button> (with input locales)
+    </p>
+    <p>
+      <button onclick="onBuyWithoutLocalesClicked('Credential #1')">Pay $0.01</button> (without locales parameter)
+    </p>
+    <p>
+      <button onclick="onBuyWithEmptyLocalesClicked('Credential #1')">Pay $0.01</button> (with empty locales array [])
+    </p>
+    <p>
+      <button onclick="onBuyClicked('Non-Existant Credential')">Pay $0.01</button> (no matching credential, with input locales)
+    </p>
+    <p>
+      <button onclick="clearAllMessages()">Clear Logs</button>
+    </p>
+  </div>
+  <pre id="msg"></pre>
+  <p>Based on the <a
+      href="https://github.com/w3c/secure-payment-confirmation">Secure Payment
+      Confirmation explainer</a></p>
+
+  <script src="../util.js"></script>
+  <script src="../spc_util.js"></script>
+  <script src="pr.js"></script>
+  <script src="/redirect.js"></script>
+</body>
+
+</html>
