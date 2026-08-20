@@ -18,7 +18,7 @@
       <input
         type="text"
         id="locales"
-        value="[en-CA]"
+        value="[en-US, en-CA, fr-CA]"
         style="width: 32em; font-family: monospace;"
         placeholder="[en-US, en-CA, fr-CA]" />
     </p>
@@ -26,16 +26,24 @@
       <button onclick="createPaymentCredential('Credential #1')">Enroll Credential #1</button>
     </p>
     <p>
-      <button onclick="onBuyClicked('Credential #1')">Pay $0.01</button> (with input locales)
+      <button onclick="onCanMakePaymentClicked('Credential #1')">canMakePayment()</button>
+      <button onclick="onShowClicked('Credential #1')">show()</button>
+      (with input locales)
     </p>
     <p>
-      <button onclick="onBuyWithoutLocalesClicked('Credential #1')">Pay $0.01</button> (without locales parameter)
+      <button onclick="onCanMakePaymentWithoutLocalesClicked('Credential #1')">canMakePayment()</button>
+      <button onclick="onShowWithoutLocalesClicked('Credential #1')">show()</button>
+      (without locales parameter)
     </p>
     <p>
-      <button onclick="onBuyWithEmptyLocalesClicked('Credential #1')">Pay $0.01</button> (with empty locales array [])
+      <button onclick="onCanMakePaymentWithEmptyLocalesClicked('Credential #1')">canMakePayment()</button>
+      <button onclick="onShowWithEmptyLocalesClicked('Credential #1')">show()</button>
+      (with empty locales array [])
     </p>
     <p>
-      <button onclick="onBuyClicked('Non-Existant Credential')">Pay $0.01</button> (no matching credential, with input locales)
+      <button onclick="onCanMakePaymentClicked('Non-Existant Credential')">canMakePayment()</button>
+      <button onclick="onShowClicked('Non-Existant Credential')">show()</button>
+      (no matching credential, with input locales)
     </p>
     <p>
       <button onclick="clearAllMessages()">Clear Logs</button>

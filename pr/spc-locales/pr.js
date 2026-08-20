@@ -1,7 +1,41 @@
 /* exported createPaymentCredential */
-/* exported onBuyClicked */
-/* exported onBuyWithoutLocalesClicked */
-/* exported onBuyWithEmptyLocalesClicked */
+/* exported onCanMakePaymentClicked */
+/* exported onShowClicked */
+/* exported onCanMakePaymentWithoutLocalesClicked */
+/* exported onShowWithoutLocalesClicked */
+/* exported onCanMakePaymentWithEmptyLocalesClicked */
+/* exported onShowWithEmptyLocalesClicked */
+
+/**
+ * Formats an error object to include its name and message.
+ */
+function formatError(err) {
+  if (!err) {
+    return 'Unknown error';
+  }
+  if (err.name && err.message) {
+    return `${err.name}: ${err.message}`;
+  }
+  if (err.name) {
+    return err.name;
+  }
+  if (err.message) {
+    return err.message;
+  }
+  return String(err);
+}
+
+/**
+ * Prints formatted error to the page log and console.
+ */
+function printError(err, prefix = '') {
+  const formattedErrorMessage = formatError(err);
+  const fullErrorMessage = prefix
+      ? `${prefix} - ${formattedErrorMessage}`
+      : formattedErrorMessage;
+  console.error(err);
+  error(fullErrorMessage);
+}
 
 /**
  * Parses a string input into an array of locale language tags.
@@ -29,6 +63,29 @@ function parseLocales(rawInput) {
 }
 
 /**
+ * Builds an SPC PaymentRequest object.
+ */
+function buildSPCPaymentRequest(windowLocalStorageIdentifier, explicitLocales) {
+  const credentialIdBase64 = window.localStorage.getItem(windowLocalStorageIdentifier);
+  const credentialIds = credentialIdBase64
+      ? [base64ToArray(credentialIdBase64)]
+      : [new Uint8Array(16)];
+  const locales = explicitLocales !== undefined
+      ? explicitLocales
+      : parseLocales(document.getElementById('locales').value);
+
+  let spcData = {
+    credentialIds,
+  };
+  if (locales !== undefined) {
+    spcData.locale = locales;
+  }
+
+  info('Building SPC PaymentRequest with locales: ' + JSON.stringify(locales));
+  return createSPCPaymentRequest(spcData);
+}
+
+/**
  * Creates a payment credential.
  */
 async function createPaymentCredential(windowLocalStorageIdentifier) {
@@ -42,38 +99,29 @@ async function createPaymentCredential(windowLocalStorageIdentifier) {
         windowLocalStorageIdentifier + ' enrolled: ' +
         objectToString(publicKeyCredential));
   } catch (err) {
-    error(err);
+    printError(err, 'Enrollment failed');
   }
 }
 
 /**
- * Launches payment request for SPC with locales.
+ * Calls canMakePayment() for SPC with locales.
  */
-async function onBuyClicked(windowLocalStorageIdentifier, explicitLocales) {
+async function onCanMakePaymentClicked(windowLocalStorageIdentifier, explicitLocales) {
   try {
-    const credentialIdBase64 = window.localStorage.getItem(windowLocalStorageIdentifier);
-    const credentialIds = credentialIdBase64 ? [base64ToArray(credentialIdBase64)] : [new Uint8Array(16)];
-    const locales = explicitLocales !== undefined
-        ? explicitLocales
-        : parseLocales(document.getElementById('locales').value);
+    const request = buildSPCPaymentRequest(windowLocalStorageIdentifier, explicitLocales);
+    const canMakePaymentResult = await request.canMakePayment();
+    info(`canMakePayment result: ${canMakePaymentResult}`);
+  } catch (err) {
+    printError(err, 'canMakePayment error');
+  }
+}
 
-    let spcData = {
-      credentialIds,
-    };
-    if (locales !== undefined) {
-      spcData.locale = locales;
-    }
-
-    info('Triggering SPC with locales: ' + JSON.stringify(locales));
-    const request = await createSPCPaymentRequest(spcData);
-
-    try {
-      const canMakePayment = await request.canMakePayment();
-      info(`canMakePayment result: ${canMakePayment}`);
-    } catch (err) {
-      error(`Error from canMakePayment: ${err.message}`);
-    }
-
+/**
+ * Calls show() for SPC with locales.
+ */
+async function onShowClicked(windowLocalStorageIdentifier, explicitLocales) {
+  try {
+    const request = buildSPCPaymentRequest(windowLocalStorageIdentifier, explicitLocales);
     const instrumentResponse = await request.show();
     await instrumentResponse.complete(/* result = */ 'success');
     console.log(instrumentResponse);
@@ -81,30 +129,41 @@ async function onBuyClicked(windowLocalStorageIdentifier, explicitLocales) {
         windowLocalStorageIdentifier + ' payment response: ' +
         objectToString(instrumentResponse));
   } catch (err) {
-    error(err);
+    printError(err, 'show error');
   }
 }
 
 /**
- * Launches payment request for SPC without locales parameter.
+ * Calls canMakePayment() for SPC without locales parameter.
  */
-async function onBuyWithoutLocalesClicked(windowLocalStorageIdentifier) {
+async function onCanMakePaymentWithoutLocalesClicked(windowLocalStorageIdentifier) {
   try {
     const credentialIdBase64 = window.localStorage.getItem(windowLocalStorageIdentifier);
-    const credentialIds = credentialIdBase64 ? [base64ToArray(credentialIdBase64)] : [new Uint8Array(16)];
+    const credentialIds = credentialIdBase64
+        ? [base64ToArray(credentialIdBase64)]
+        : [new Uint8Array(16)];
 
-    info('Triggering SPC without locales parameter.');
-    const request = await createSPCPaymentRequest({
-      credentialIds,
-    });
+    info('Building SPC PaymentRequest without locales parameter.');
+    const request = createSPCPaymentRequest({credentialIds});
+    const canMakePaymentResult = await request.canMakePayment();
+    info(`canMakePayment result: ${canMakePaymentResult}`);
+  } catch (err) {
+    printError(err, 'canMakePayment error');
+  }
+}
 
-    try {
-      const canMakePayment = await request.canMakePayment();
-      info(`canMakePayment result: ${canMakePayment}`);
-    } catch (err) {
-      error(`Error from canMakePayment: ${err.message}`);
-    }
+/**
+ * Calls show() for SPC without locales parameter.
+ */
+async function onShowWithoutLocalesClicked(windowLocalStorageIdentifier) {
+  try {
+    const credentialIdBase64 = window.localStorage.getItem(windowLocalStorageIdentifier);
+    const credentialIds = credentialIdBase64
+        ? [base64ToArray(credentialIdBase64)]
+        : [new Uint8Array(16)];
 
+    info('Building SPC PaymentRequest without locales parameter.');
+    const request = createSPCPaymentRequest({credentialIds});
     const instrumentResponse = await request.show();
     await instrumentResponse.complete(/* result = */ 'success');
     console.log(instrumentResponse);
@@ -112,15 +171,22 @@ async function onBuyWithoutLocalesClicked(windowLocalStorageIdentifier) {
         windowLocalStorageIdentifier + ' payment response: ' +
         objectToString(instrumentResponse));
   } catch (err) {
-    error(err);
+    printError(err, 'show error');
   }
 }
 
 /**
- * Launches payment request for SPC with empty locales array.
+ * Calls canMakePayment() for SPC with empty locales array.
  */
-async function onBuyWithEmptyLocalesClicked(windowLocalStorageIdentifier) {
-  return onBuyClicked(windowLocalStorageIdentifier, /* explicitLocales = */ []);
+async function onCanMakePaymentWithEmptyLocalesClicked(windowLocalStorageIdentifier) {
+  return onCanMakePaymentClicked(windowLocalStorageIdentifier, /* explicitLocales = */ []);
+}
+
+/**
+ * Calls show() for SPC with empty locales array.
+ */
+async function onShowWithEmptyLocalesClicked(windowLocalStorageIdentifier) {
+  return onShowClicked(windowLocalStorageIdentifier, /* explicitLocales = */ []);
 }
 
 if (window.PublicKeyCredential) {
@@ -130,13 +196,13 @@ if (window.PublicKeyCredential) {
           info(`isUserVerifyingPlatformAuthenticatorAvailable: ${available}`);
         })
         .catch((err) => {
-          error(`Error when calling isUserVerifyingPlatformAuthenticatorAvailable: ${err.message}`);
+          printError(err, 'isUserVerifyingPlatformAuthenticatorAvailable error');
         });
   } else {
-    error('PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable method not detected.');
+    printError({name: 'NotDetected', message: 'PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable method not detected.'});
   }
 } else {
-  error('PublicKeyCredential interface not detected.');
+  printError({name: 'NotDetected', message: 'PublicKeyCredential interface not detected.'});
 }
 
 if (window.PaymentRequest && PaymentRequest.securePaymentConfirmationAvailability) {
@@ -145,7 +211,7 @@ if (window.PaymentRequest && PaymentRequest.securePaymentConfirmationAvailabilit
         info(`PaymentRequest.securePaymentConfirmationAvailability: ${available}`);
       })
       .catch((err) => {
-        error(`Error when calling PaymentRequest.securePaymentConfirmationAvailability: ${err.message}`);
+        printError(err, 'PaymentRequest.securePaymentConfirmationAvailability error');
       });
 } else {
   info('PaymentRequest.securePaymentConfirmationAvailability method not available.');
